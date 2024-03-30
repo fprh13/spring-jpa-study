@@ -44,7 +44,7 @@ public abstract class Item { // 추상 클래스로 진행 (구현체를 이용�
     /**
      * stock 감소
      */
-    public void remove(int quantity) {
+    public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0) {
             throw new NotEnoughStockException("need more stock");
