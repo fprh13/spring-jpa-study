@@ -28,13 +28,12 @@ class MemberRepositoryTest {
         Member member = new Member("memberA");
         //when
         Long saveId = memberRepository.save(member);
-        Member findMember = memberRepository.find(saveId);
+        Member findMember = memberRepository.findOne(saveId);
         //then
         assertEquals(findMember.getId(), member.getId());
         assertEquals(findMember.getName(), member.getName());
         assertEquals(member,findMember);
 
-        Category category = new Category();
     }
 
 }

@@ -3,6 +3,7 @@ package jpabook.jpashop.entity.item;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.entity.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -29,6 +30,27 @@ public abstract class Item { // 추상 클래스로 진행 (구현체를 이용�
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    // 데이터를 가지고 잇는 곳에서 비즈니스로직이 나가는게 응집도가 높기 때문에 엔티티에서 작성
+    //==비즈니스 로직==//
+
+    /**
+     * stock 증가
+     */
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * stock 감소
+     */
+    public void remove(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 
 
 }
