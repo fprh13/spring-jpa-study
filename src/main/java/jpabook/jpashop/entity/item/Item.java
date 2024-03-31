@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jpabook.jpashop.entity.Category;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 // JOINED : 가장 정규화 된 스타일
 @DiscriminatorColumn(name = "dtype") // @DiscriminatorValue("B") 벨류를 각 상속받은 클래스에 지정
 @Getter
+@Setter
 public abstract class Item { // 추상 클래스로 진행 (구현체를 이용하여 만들 계획)
 
     @Id
@@ -51,6 +53,8 @@ public abstract class Item { // 추상 클래스로 진행 (구현체를 이용�
         }
         this.stockQuantity = restStock;
     }
+
+
 
 
 }
